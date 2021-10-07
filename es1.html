@@ -3,21 +3,40 @@
     <title>ES 1</title>
   </head>
   <body>
-    <button onclick="console.log('click da evento')">click da evento</button>
-    <button onclick="funzioneClick()">click da script</button>
+    <button onclick="funzioneClick('script')">click da script</button>
+    <div id="div1">
+      <p>Non premere, per cortesia</p>
+    </div>
     <button id="btn3">click da listener</button>
 
     <script>
-      var funzioneClick = function(){
-        console.log("click da script");
-      };
+      // var funzioneClick = function(){
+      //   console.log("click da script");
+      // };
 
-      var funzioneClickAscoltatore = function(){
-        console.log("click da evento");
+      var funzioneClick = function(stringa){
+        console.log("click da " + stringa);
       };
 
       var bottone3 = document.getElementById("btn3");
-      bottone3.addEventListener("click",funzioneClickAscoltatore);
+      var c = true;
+      bottone3.addEventListener("click", 
+        function() {
+          funzioneClick('listener');
+
+          var div1 = document.getElementById("div1");
+          div1.setAttribute("style", "background-color: pink");
+          div1.innerHTML = "<h1>TI AVEVO DETTO DI NON CLICCARE</h1>";
+
+          if(c){
+            bottone3.setAttribute("style","background-color: red");
+            c = false;
+            }else{
+              bottone3.setAttribute("style","background-color: default");
+              c = true;
+          }
+        }
+      );
     </script>
     
   </body>
